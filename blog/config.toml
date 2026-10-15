@@ -9,7 +9,6 @@ theme = "ghostwriter"
     description = "CTF writeups by R4ph3cks"
     github = "https://github.com/R4ph3cks"
     dateFormat = "Mon, Jan 2, 2006"
-    logo = "/images/R4p3cks.png"
 
 [Permalinks]
     post = "/:filename/"

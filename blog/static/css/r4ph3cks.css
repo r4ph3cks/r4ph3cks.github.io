@@ -7,9 +7,7 @@
 }
 
 body {
-    background:
-        radial-gradient(circle at 8% 4%, rgba(0, 245, 233, 0.12), transparent 26rem),
-        var(--r4-ink);
+    background: var(--r4-ink);
     color: #d9e6e8;
     display: flex;
     flex-direction: column;
@@ -31,6 +29,13 @@ body {
     flex: 0 0 auto;
     height: auto;
     min-height: 265px;
+    margin-top: 0;
+    position: relative;
+    z-index: 2;
+}
+
+#post-index {
+    clip-path: inset(0 -200px 0 -200px);
 }
 
 .site-header {
@@ -130,8 +135,11 @@ hr {
 .ascii-duck--ten { right: -125px; top: 1530px; transform: rotate(5deg); }
 .ascii-duck--eleven { left: -140px; top: 1690px; transform: rotate(7deg); }
 .ascii-duck--twelve { right: -135px; top: 1850px; transform: rotate(-5deg); }
+.ascii-duck--thirteen { left: -130px; top: 2010px; transform: rotate(-8deg); }
+.ascii-duck--fourteen { right: -140px; top: 2170px; transform: rotate(6deg); }
 
 .writeup-page {
+    clip-path: inset(0 -200px 0 -200px);
     position: relative;
 }
 
@@ -167,6 +175,7 @@ hr {
     .ascii-duck--seven,
     .ascii-duck--nine,
     .ascii-duck--eleven,
+    .ascii-duck--thirteen,
     .scroll-duck--left {
         left: 12px;
     }
@@ -177,6 +186,7 @@ hr {
     .ascii-duck--eight,
     .ascii-duck--ten,
     .ascii-duck--twelve,
+    .ascii-duck--fourteen,
     .scroll-duck--right {
         right: 12px;
     }

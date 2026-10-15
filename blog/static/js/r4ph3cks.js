@@ -8,7 +8,7 @@
         "  __\n<(o )___\n ( ._> /\n  `---' ",
         "   _\n __( ' )>\n \\_ < _\n  /___/"
     ];
-    var count = Math.max(8, Math.ceil(document.documentElement.scrollHeight / 360));
+    var count = 14;
 
     for (var index = 0; index < count; index += 1) {
         var duck = document.createElement("span");

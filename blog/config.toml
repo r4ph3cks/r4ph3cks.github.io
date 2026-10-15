@@ -1,13 +1,13 @@
 baseURL = "https://r4ph3cks.at.eu.org/"
-title = "R4p3cks Blog"
+title = "R4ph3cks Blog"
 theme = "ghostwriter"
 
 [Params]
     mainSections = ["post"]
     intro = true
-    headline = "R4p3cks Writeups"
-    description = "CTF writeups by R4p3cks"
-    github = "https://github.com/R4p3cks"
+    headline = "R4ph3cks Writeups"
+    description = "CTF writeups by R4ph3cks"
+    github = "https://github.com/R4ph3cks"
     dateFormat = "Mon, Jan 2, 2006"
 
 [Permalinks]

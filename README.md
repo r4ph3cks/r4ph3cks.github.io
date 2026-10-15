@@ -1,15 +1,15 @@
-# R4P3CKS BLOG
+# R4PH3CKS BLOG
 
 ## Table of Contents
 
-- [R4P3CKS BLOG](#r4p3cks-blog)
+- [R4PH3CKS BLOG](#r4ph3cks-blog)
   - [Table of Contents](#table-of-contents)
-  - [Welcome to the R4P3CKS Blog](#welcome-to-the-r4p3cks-blog)
+  - [Welcome to the R4PH3CKS Blog](#welcome-to-the-r4ph3cks-blog)
   - [Contributing](#contributing)
 
-## Welcome to the R4P3CKS Blog
+## Welcome to the R4PH3CKS Blog
 
-This repository is dedicated to the R4p3cks blog, where we share writeups and maybe insights on various topics of interest.
+This repository is dedicated to the R4ph3cks blog, where we share writeups and maybe insights on various topics of interest.
 
 ## Contributing
 

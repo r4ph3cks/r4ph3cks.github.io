@@ -1,0 +1,16 @@
+{{ partial "header.html" . }}
+
+<div class="container writeup-page">
+    <div class="writeup-duck-layer" data-duck-scroll aria-hidden="true"></div>
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        {{ partial "post-header.html" . }}
+
+        {{ partial "post-content.html" . }}
+
+        {{ partial "post-footer.html" . }}
+
+        {{ partial "comments.html" . }}
+    </article>
+</div>
+
+{{ partial "footer.html" . }}

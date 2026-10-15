@@ -8,13 +8,13 @@
         "  __\n<(o )___\n ( ._> /\n  `---' ",
         "   _\n __( ' )>\n \\_ < _\n  /___/"
     ];
-    var count = Math.max(3, Math.ceil(document.documentElement.scrollHeight / 850));
+    var count = Math.max(8, Math.ceil(document.documentElement.scrollHeight / 360));
 
     for (var index = 0; index < count; index += 1) {
         var duck = document.createElement("span");
         duck.className = "scroll-duck scroll-duck--" + (index % 2 ? "right" : "left");
         duck.textContent = duckArt[index % duckArt.length];
-        duck.style.top = (300 + index * 850) + "px";
+        duck.style.top = (300 + index * 360) + "px";
         duck.style.setProperty("--duck-tilt", (index % 2 ? "5deg" : "-5deg"));
         layer.appendChild(duck);
     }

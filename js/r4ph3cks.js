@@ -8,21 +8,37 @@
         "  __\n<(o )___\n ( ._> /\n  `---' ",
         "   _\n __( ' )>\n \\_ < _\n  /___/"
     ];
-    var count = 74;
     var host = layer.closest(".writeup-page, #post-index");
-    var hostHeight = host ? host.scrollHeight : 0;
+    var hostHeight = Math.max(host ? host.scrollHeight : 0, 1);
+    var columnsPerSide = 3;
+    var rowHeight = 120;
+    var rowCount = Math.max(3, Math.ceil(hostHeight / rowHeight));
+    var actualRowHeight = hostHeight / rowCount;
+    var columnOffsets = [-145, -75, -5];
 
-    for (var index = 0; index < count; index += 1) {
-        var duck = document.createElement("span");
-        duck.className = "ascii-duck scroll-duck--" + (index % 2 ? "right" : "left");
-        duck.textContent = duckArt[index % duckArt.length];
-        duck.style.top = (index * hostHeight / count) + "px";
-        duck.style.setProperty("--duck-tilt", (index % 2 ? "5deg" : "-5deg"));
-        layer.appendChild(duck);
+    for (var row = 0; row < rowCount; row += 1) {
+        for (var side = 0; side < 2; side += 1) {
+            for (var column = 0; column < columnsPerSide; column += 1) {
+                var duck = document.createElement("span");
+                var isRight = side === 1;
+                var verticalOffset = (column - 1) * 28;
+                var horizontalOffset = columnOffsets[column];
+
+                duck.className = "ascii-duck scroll-duck scroll-duck--" +
+                    (isRight ? "right" : "left");
+                duck.textContent = duckArt[(row + column + side) % duckArt.length];
+                duck.style.top = (row * actualRowHeight + verticalOffset) + "px";
+                duck.style.setProperty("--duck-offset", horizontalOffset + "px");
+                duck.style.setProperty("--duck-tilt", ((row + column) % 2 ? "5deg" : "-5deg"));
+                layer.appendChild(duck);
+            }
+        }
     }
 
     if (!("IntersectionObserver" in window)) {
-        layer.classList.add("is-visible");
+        layer.querySelectorAll(".scroll-duck").forEach(function (duck) {
+            duck.classList.add("is-visible");
+        });
         return;
     }
 

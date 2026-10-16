@@ -17,7 +17,7 @@ body {
 #wrapper {
     flex: 1 0 auto;
     margin-bottom: 0;
-    min-height: 0;
+    min-height: calc(100vh - 265px);
 }
 
 #wrapper::after {
@@ -108,9 +108,10 @@ hr {
 }
 
 .ascii-duck-field {
-    height: 0;
+    height: 100%;
+    inset: 0;
     pointer-events: none;
-    position: relative;
+    position: absolute;
     z-index: 0;
 }
 

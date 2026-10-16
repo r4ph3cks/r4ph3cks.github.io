@@ -1,5 +1,5 @@
 (function () {
-    var layer = document.querySelector("[data-duck-scroll]");
+    var layer = document.querySelector("[data-duck-scroll], [data-duck-field]");
     if (!layer) {
         return;
     }
@@ -8,13 +8,15 @@
         "  __\n<(o )___\n ( ._> /\n  `---' ",
         "   _\n __( ' )>\n \\_ < _\n  /___/"
     ];
-    var count = 14;
+    var count = 74;
+    var host = layer.closest(".writeup-page, #post-index");
+    var hostHeight = host ? host.scrollHeight : 0;
 
     for (var index = 0; index < count; index += 1) {
         var duck = document.createElement("span");
-        duck.className = "scroll-duck scroll-duck--" + (index % 2 ? "right" : "left");
+        duck.className = "ascii-duck scroll-duck--" + (index % 2 ? "right" : "left");
         duck.textContent = duckArt[index % duckArt.length];
-        duck.style.top = (300 + index * 360) + "px";
+        duck.style.top = (index * hostHeight / count) + "px";
         duck.style.setProperty("--duck-tilt", (index % 2 ? "5deg" : "-5deg"));
         layer.appendChild(duck);
     }

@@ -162,8 +162,8 @@ hr {
     transform: translateY(18px) rotate(var(--duck-tilt));
 }
 
-.scroll-duck--left { left: -145px; }
-.scroll-duck--right { right: -145px; }
+.scroll-duck--left { left: var(--duck-offset); }
+.scroll-duck--right { right: var(--duck-offset); }
 .scroll-duck.is-visible {
     opacity: 0.42;
     transform: translateY(0) rotate(var(--duck-tilt));
@@ -178,7 +178,7 @@ hr {
     .ascii-duck--eleven,
     .ascii-duck--thirteen,
     .scroll-duck--left {
-        left: 12px;
+        left: var(--duck-offset);
     }
 
     .ascii-duck--two,
@@ -189,7 +189,7 @@ hr {
     .ascii-duck--twelve,
     .ascii-duck--fourteen,
     .scroll-duck--right {
-        right: 12px;
+        right: var(--duck-offset);
     }
 }
 

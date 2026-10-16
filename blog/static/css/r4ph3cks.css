@@ -35,7 +35,7 @@ body {
 }
 
 #post-index {
-    clip-path: inset(0 -200px 0 -200px);
+    position: relative;
 }
 
 .site-header {
@@ -109,9 +109,12 @@ hr {
 
 .ascii-duck-field {
     height: 100%;
-    inset: 0;
+    left: 50%;
     pointer-events: none;
     position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    width: 100vw;
     z-index: 0;
 }
 
@@ -140,14 +143,17 @@ hr {
 .ascii-duck--fourteen { right: -140px; top: 2170px; transform: rotate(6deg); }
 
 .writeup-page {
-    clip-path: inset(0 -200px 0 -200px);
     position: relative;
 }
 
 .writeup-duck-layer {
-    inset: 0;
+    height: 100%;
+    left: 50%;
     pointer-events: none;
     position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    width: 100vw;
     z-index: 0;
 }
 
@@ -159,50 +165,39 @@ hr {
 .scroll-duck {
     opacity: 0;
     transition: opacity 700ms ease, transform 700ms ease;
-    transform: translateY(18px) rotate(var(--duck-tilt));
+    transform: translate(-50%, 18px) rotate(var(--duck-tilt));
 }
 
-.scroll-duck--left { left: var(--duck-offset); }
-.scroll-duck--right { right: var(--duck-offset); }
+.scroll-duck--center {
+    opacity: 0.16;
+}
+
 .scroll-duck.is-visible {
     opacity: 0.42;
-    transform: translateY(0) rotate(var(--duck-tilt));
+    transform: translate(-50%, 0) rotate(var(--duck-tilt));
+}
+
+.scroll-duck--center.is-visible {
+    opacity: 0.16;
 }
 
 @media (max-width: 1100px) {
-    .ascii-duck--one,
-    .ascii-duck--three,
-    .ascii-duck--five,
-    .ascii-duck--seven,
-    .ascii-duck--nine,
-    .ascii-duck--eleven,
-    .ascii-duck--thirteen,
-    .scroll-duck--left {
-        left: var(--duck-offset);
-    }
-
-    .ascii-duck--two,
-    .ascii-duck--four,
-    .ascii-duck--six,
-    .ascii-duck--eight,
-    .ascii-duck--ten,
-    .ascii-duck--twelve,
-    .ascii-duck--fourteen,
-    .scroll-duck--right {
-        right: var(--duck-offset);
+    .ascii-duck-field,
+    .writeup-duck-layer {
+        width: 100vw;
     }
 }
 
 @media (max-width: 640px) {
-    .ascii-duck-field,
-    .writeup-duck-layer {
-        display: none;
+    .ascii-duck,
+    .scroll-duck {
+        font-size: 10px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .scroll-duck {
         transition: none;
-        transform: none;
+        transform: translate(-50%, 0) rotate(var(--duck-tilt));
     }
 }
